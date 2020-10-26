@@ -5,6 +5,7 @@ function getAssets() {
         .then(res => res.json())
         .then(res => res.data)
 }
+
 export default {
     getAssets
 }

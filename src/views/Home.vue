@@ -1,6 +1,6 @@
 <template>
     <div>
-        <px-assets-table />
+        <px-assets-table :assets='assets' />
     </div>
 </template>
 
@@ -10,8 +10,18 @@ import PxAssetsTable from '@/components/PxAssetsTable'
 
 export default {
     name: 'Home',
-    components: {
-        PxAssetsTable
+
+    components: { PxAssetsTable },
+
+    data() {
+        return {
+            assets: []
+        }
+    },
+
+    created() {
+        api.getAssets()
+            .then(assets => (this.assets = assets))
     }
 }
 </script>
