@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="bg-gray-700">
     <px-header :links="links" />
     <router-view class="container px-5 sm:px-20 py-20 flex justify-center"/>
   </main>
@@ -46,7 +46,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: white;
   margin-top: 60px;
 }
 </style>

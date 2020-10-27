@@ -1,13 +1,13 @@
 <template>
-  <div class="flex-col">
+  <div class="flex-col bg-gray-700 min-h-screen">
     <div class="flex justify-center">
       <bounce-loader :loading="isLoading" :color="'#68d391'" :size="100" />
     </div>
 
     <template v-if="!isLoading">
-      <div class="flex flex-col sm:flex-row justify-around items-center">
+      <div class="flex flex-col sm:flex-row justify-between items-center">
         <div class="flex flex-col items-center">
-          <img class="w-20 h-20 mr-5" 
+          <img class="w-20 h-20" 
             :src="`https://static.coincap.io/assets/icons/${asset.symbol.toLowerCase()}@2x.png`"
             :alt="asset.name">
           <h1 class="text-5xl">
@@ -15,32 +15,32 @@
           </h1>
         </div>
 
-        <div class="my-10 flex flex-col">
+        <div class="flex flex-col leading-relaxed">
           <ul>
             <li class="flex justify-between">
-                <b class="text-gray-600 mr-10 uppercase">Ranking</b>
+                <b class="text-gray-500 mr-10 uppercase">Ranking</b>
                 <span>#{{ asset.rank | dollar }}</span>
             </li>
             <li class="flex justify-between">
-                <b class="text-gray-600 mr-10 uppercase">Precio actual</b>
+                <b class="text-gray-500 mr-10 uppercase">Precio actual</b>
                 <span>{{asset.priceUsd | dollar }}</span>
             </li>
             <li class="flex justify-between">
-                <b class="text-gray-600 mr-10 uppercase">Precio más bajo</b>
+                <b class="text-gray-500 mr-10 uppercase">Precio más bajo</b>
                 <span>{{ min | dollar }} </span>
             </li>
             <li class="flex justify-between">
-                <b class="text-gray-600 mr-10 uppercase">Precio promedio</b>
+                <b class="text-gray-500 mr-10 uppercase">Precio promedio</b>
                 <span>{{ max | dollar }} </span>
             </li>
             <li class="flex justify-between">
-                <b class="text-gray-600 mr-10 uppercase">Variación 24hs</b>
-                <span>{{ asset.changePercente24Hr | percent }}</span>
+                <b class="text-gray-500 mr-10 uppercase">Variación 24hs</b>
+                <span>{{ asset.changePercent24Hr | percent }}</span>
             </li>
           </ul>
         </div>
 
-        <div class="my-10 sm:mt-0 flex flex-col justify-center text-center">
+        <div class="sm:mt-0 flex flex-col justify-center text-center">
           <button 
             @click="toggleConverter"
             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
@@ -53,18 +53,18 @@
           </button>
 
           <div class="flex flex-row my-5">
-            <label class="w-full" for="converValue">
+            <label for="converValue">
               <input 
                 v-model="convertValue"
                 type="number" 
                 id="convertValue" 
                 :placeholder="`Valor en ${ fromUsd ? 'USD' : asset.symbol }`"
-                class="text-center bg-white focus:outline-none focus:shadow-outline border"
+                class="text-center text-gray-500 bg-gray-800 focus:outline-none focus:shadow-none border-none rounded"
               >
             </label>
           </div>
 
-          <span class="text-xl">{{ convertResult }}</span>
+          <span class="text-xl text-gray-500 bg-gray-800 rounded">{{ convertResult }}</span>
         </div>
       </div>
 

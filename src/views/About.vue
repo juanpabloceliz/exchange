@@ -1,10 +1,10 @@
 <template>
-  <div class="flex-col items-center">
-    <h1 class="text-gray-700 text-6xl">Exchange v1.0.0</h1>
+  <div class="flex-col items-center min-h-screen">
+    <h1 class="text-gray-800 text-6xl">Exchange v1.0.0</h1>
     <p class="text-gray-600 text-xl text-center">
       Proyecto para obtener las cotizaciones de las cryptomonedas más
       importantes a través de la API REST de Coincap.
-      <br />Este proyecto tiene como objetivo practicar y mejorar mis habilidades con Vue.
+      <br />Este proyecto tiene como objetivo practicar y mejorar mis habilidades con Vue y Tailwind.
     </p>
 
     <router-link

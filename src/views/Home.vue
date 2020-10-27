@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="bg-gray-700 min-h-screen items-center" >
         <bounce-loader :loading="isLoading" :color="'#68d391'" :size="100" />
         <px-assets-table v-if="!isLoading" :assets='assets' />
     </div>
