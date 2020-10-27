@@ -41,17 +41,30 @@
         </div>
 
         <div class="my-10 sm:mt-0 flex flex-col justify-center text-center">
-          <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-            Cambiar
+          <button 
+            @click="toggleConverter"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          >
+            {{
+              fromUsd
+              ? `USD a ${asset.symbol}`
+              : `${asset.symbol} a USD`
+            }}
           </button>
 
           <div class="flex flex-row my-5">
             <label class="w-full" for="converValue">
-              <input type="number" id="convertValue" class="text-center bg-white focus:outline-none focus:shadow-outline border">
+              <input 
+                v-model="convertValue"
+                type="number" 
+                id="convertValue" 
+                :placeholder="`Valor en ${ fromUsd ? 'USD' : asset.symbol }`"
+                class="text-center bg-white focus:outline-none focus:shadow-outline border"
+              >
             </label>
           </div>
 
-          <span class="text-xl"></span>
+          <span class="text-xl">{{ convertResult }}</span>
         </div>
       </div>
 
@@ -100,13 +113,26 @@ export default {
       isLoading: false,
       asset: {},
       history: [],
-      markets: []
+      markets: [],
+      fromUsd: true,
+      convertValue: null
     }
   },
 
   components: { PxButton },
 
   computed: {
+    convertResult () {
+      if (!this.convertValue) {
+        return 0
+      }
+
+      const result = this.fromUsd
+      ? this.convertValue / this.asset.priceUsd 
+      : this.convertValue * this.asset.priceUsd
+
+      return result.toFixed(4)
+    },
     min () {
       return Math.min(
         ... this.history.map(h=> parseFloat(h.priceUsd).toFixed(2))
@@ -122,11 +148,20 @@ export default {
     }
   },
 
+  watch: {
+    $route () {
+      this.getCoin()
+    }
+  },
+
   created () {
     this.getCoin()
   },
 
   methods: {
+    toggleConverter () {
+      this.fromUsd = !this.fromUsd
+    },
     getWebsite (exchange) {
       this.$set(exchange, 'isLoading', true)
 
@@ -156,3 +191,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  td {
+    padding: 10px;
+    text-align: center;
+  }
+</style>
